@@ -1,0 +1,8 @@
+C:\Users\User\source\repos\EntOff\obj\Debug\net6.0\EntOff.csproj.AssemblyReference.cache
+C:\Users\User\source\repos\EntOff\obj\Debug\net6.0\EntOff.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\source\repos\EntOff\obj\Debug\net6.0\EntOff.AssemblyInfoInputs.cache
+C:\Users\User\source\repos\EntOff\obj\Debug\net6.0\EntOff.AssemblyInfo.cs
+C:\Users\User\source\repos\EntOff\obj\Debug\net6.0\EntOff.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\EntOff\obj\Debug\net6.0\EntOff.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\User\source\repos\EntOff\obj\Debug\net6.0\EntOff.RazorAssemblyInfo.cache
+C:\Users\User\source\repos\EntOff\obj\Debug\net6.0\EntOff.RazorAssemblyInfo.cs
