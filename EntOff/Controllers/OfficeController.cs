@@ -25,11 +25,11 @@ namespace EntOff.Api.Controllers
         public async ValueTask<ActionResult<UserDto>> LeaveOffice() =>
             Ok(await this.officeService.LeaveOfficeAsync(HttpContext.User.FindFirst(ClaimTypes.Email).Value));
 
-        [HttpPost("GetAllEntries")]
+        [HttpGet("GetAllEntries")]
         public async ValueTask<ActionResult<IEnumerable<UserDto>>> GetAllEntries(Boolean search) =>
            Ok(await this.officeService.RetrieveAllEntries(search));
 
-        [HttpPost("GetHistory")]
+        [HttpGet("GetHistory")]
         public async ValueTask<ActionResult<IEnumerable<UserDto>>> GetHistory(int search) =>
            Ok(await this.officeService.RetrieveAllHistory(search));
     }

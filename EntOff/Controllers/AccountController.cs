@@ -24,6 +24,8 @@ namespace EntOff.Api.Controllers
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto) =>
             Ok(await this.accountService.UserLoginAsync(loginDto));
 
-       
+        [HttpPost("logout")]
+        public async Task<ActionResult<string>> Logout(LogoutDto logoutDto) =>
+             Ok(await this.accountService.UserLogoutAsync(logoutDto));
     }
 }

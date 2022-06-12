@@ -1,5 +1,5 @@
-﻿using NetXceptions;
-
+﻿
+using NetXceptions;
 namespace EntOff.Api.Models.Exceptions.Roles
 {
     public class NullRoleException : NetXception

@@ -14,14 +14,19 @@ namespace EntOff.Api.Infrastructure.Providers.Tokens
     public class TokenProvider : ITokenProvider
     {
         private readonly SymmetricSecurityKey securityKey;
-        public TokenProvider(IConfiguration configuration)
+        private readonly IDistributedCache _cache;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public TokenProvider(IConfiguration configuration, IDistributedCache cache,
+                IHttpContextAccessor httpContextAccessor)
         {
             var jwtConfiguration =
                 configuration.GetSection(nameof(JwtConfiguration)).Get<JwtConfiguration>();
 
             securityKey = new SymmetricSecurityKey(
                 Encoding.UTF8.GetBytes(jwtConfiguration.Key));
-          
+            _cache = cache;
+            _httpContextAccessor = httpContextAccessor;
+
         }
 
         public string CreateToken(User user, string role, TagDto tagDto)
@@ -78,6 +83,29 @@ namespace EntOff.Api.Infrastructure.Providers.Tokens
 
             return tokenHandler.WriteToken(token);
         }
-        
+        public async Task DeactivateCurrentAsync()
+            => await DeactivateAsync(GetCurrentAsync());
+        private string GetCurrentAsync()
+        {
+            var authorizationHeader = _httpContextAccessor.HttpContext.Request.Headers["authorization"];
+
+            return authorizationHeader == StringValues.Empty
+                ? string.Empty
+                : authorizationHeader.Single().Split(" ").Last();
+        }
+
+        private static string GetKey(string token)
+            => $"tokens:{token}:deactivated";
+        public async Task DeactivateAsync(string token)
+           => await _cache.SetStringAsync(GetKey(token),
+               " ", new DistributedCacheEntryOptions
+               {
+                   AbsoluteExpirationRelativeToNow =
+                       TimeSpan.FromMinutes(1)
+               });
+        public async Task<bool> IsActiveAsync(string token)
+       => await _cache.GetStringAsync(GetKey(token)) == null;
+        public async Task<bool> IsCurrentActiveToken()
+       => await IsActiveAsync(GetCurrentAsync());
     }
 }

@@ -4,6 +4,5 @@
     {
         public List<string> Messages { get; set; }
 
-        public object DeveloperMessage { get; set; }
     }
 }

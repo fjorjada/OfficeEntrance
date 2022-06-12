@@ -9,6 +9,7 @@ namespace EntOff.Api.Services.Processings.Accounts
     {
         Task<UserDto> UserLoginAsync(LoginDto loginDto);
         Task<UserDto> UserRegisterAsync(RegisterDto registerDto);
+        Task<string> UserLogoutAsync(LogoutDto logoutDto);
         
     }
 }

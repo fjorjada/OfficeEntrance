@@ -3,6 +3,7 @@ using EntOff.Api.Infrastructure.Extensions.Startup;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.AspNetCore.Http;
+using EntOff.Entrance.TokenManagement;
 
 namespace EntOff.Api
 {
@@ -19,9 +20,15 @@ namespace EntOff.Api
             services.AddDbContext<StorageEntrance>();
             services.AddEntrance();
             services.AddIdentityServices(Configuration);
+            services.AddTransient<TokenManagerMiddleware>();
             services.AddServices();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddSwagger();
+            services.AddDistributedRedisCache(r =>
+            {
+                r.Configuration = Configuration["redis:connectionString"];
+            });
+
+                services.AddSwagger();
         }
 
         public void Configure(IApplicationBuilder builder, IWebHostEnvironment env)
@@ -38,7 +45,7 @@ namespace EntOff.Api
             builder.UseAuthentication();
             builder.UseAuthorization();
             builder.UseCors("MyPolicy");
-
+            builder.UseMiddleware<TokenManagerMiddleware>();
             builder.UseEndpoints(endpoints => endpoints.MapControllers());
         }
 

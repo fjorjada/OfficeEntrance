@@ -1,11 +1,10 @@
-﻿using NetXceptions;
-
+﻿
 namespace EntOff.Api.Models.Exceptions.Users
 {
-    public class AlreadyExistsUsernameException : NetXception
+    public class AlreadyExistsUsernameException : AggregateException
     {
         public AlreadyExistsUsernameException(string username)
-            : base($"Username '{username}' is taken")
+            : base($"Username '{username}' exists in the system. Please take another username.")
         {
         }
     }

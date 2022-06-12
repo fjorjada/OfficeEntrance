@@ -1,5 +1,5 @@
-﻿using NetXceptions;
-
+﻿
+using NetXceptions;
 namespace EntOff.Api.Models.Exceptions.History
 {
     public class NotFoundHistoryException : NetXception

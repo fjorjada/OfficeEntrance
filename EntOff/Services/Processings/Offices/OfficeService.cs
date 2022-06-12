@@ -1,6 +1,7 @@
 ﻿using EntOff.Api.Infrastructure.Mappings;
 using EntOff.Api.Models.DTOs.Users;
 using EntOff.Api.Models.Entities.Users;
+using EntOff.Api.Models.Exceptions.History;
 using EntOff.Api.Services.Foundations.Users;
 using EntOff.Models.DTOs.History;
 using EntOff.Models.Entities.History;
@@ -57,40 +58,57 @@ namespace EntOff.Api.Services.Processings.Offices
 
         public async ValueTask<IEnumerable<UserDto>> RetrieveAllEntries(Boolean search)
         {
-            var userentries = new List<UserDto>();
-            var tags = this.userService.RetreiveUsersAsync();
-            if (tags != null)
+            try
             {
-                var filtered = await tags.Where(x => x.InOffice == search).ToListAsync();
-                userentries.AddRange(filtered.Select(y => y.ToDto()));
+                var userentries = new List<UserDto>();
+                var tags = this.userService.RetreiveUsersAsync();
+                if (tags != null)
+                {
+                    var filtered = await tags.Where(x => x.InOffice == search).ToListAsync();
+                    userentries.AddRange(filtered.Select(y => y.ToDto()));
+                }
+
+                return userentries;
             }
-           
-            return userentries;
+            catch (Exception ex)
+            {
+                throw new InvalidHistoryException();
+            }
+            
         }
         public async ValueTask<IEnumerable<HistoryDto>> RetrieveAllHistory(int search)
         {
-            var history = new List<HistoryDto>();
-            var histo = this.historyService.GetHistoryAsync();
-            var tags = this.userService.RetreiveUsersAsync();
-            Nullable<bool> searc = null;
-            if (histo != null)
+            try
             {
-                switch (search)
-            {
-                case 1:  searc = false;
-                    break;
-                case 2: searc = true;
-                    break;
-                case 3:
-                         searc = null;
-                        break;
-            }
-               
-                var filtered = await histo.Where(x => searc == null ? search==3 : x.InOut == searc).ToListAsync();
+                var history = new List<HistoryDto>();
+                var histo = this.historyService.GetHistoryAsync();
+                var tags = this.userService.RetreiveUsersAsync();
+                Nullable<bool> searc = null;
+                if (histo != null)
+                {
+                    switch (search)
+                    {
+                        case 1:
+                            searc = false;
+                            break;
+                        case 2:
+                            searc = true;
+                            break;
+                        case 3:
+                            searc = null;
+                            break;
+                    }
 
-                history.AddRange(filtered.Select(y => y.HisDto()));
+                    var filtered = await histo.Where(x => searc == null ? search == 3 : x.InOut == searc).ToListAsync();
+
+                    history.AddRange(filtered.Select(y => y.HisDto()));
+                }
+                return history;
+            }catch(Exception ex)
+            {
+                throw new InvalidHistoryException();
             }
-            return history;
+            
             
         }
     }

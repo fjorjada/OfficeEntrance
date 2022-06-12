@@ -12,7 +12,6 @@ C:\Users\User\source\repos\EntOff\EntOff\bin\Debug\net6.0\EntOff.deps.json
 C:\Users\User\source\repos\EntOff\EntOff\bin\Debug\net6.0\EntOff.runtimeconfig.json
 C:\Users\User\source\repos\EntOff\EntOff\bin\Debug\net6.0\EntOff.dll
 C:\Users\User\source\repos\EntOff\EntOff\bin\Debug\net6.0\EntOff.pdb
-C:\Users\User\source\repos\EntOff\EntOff\bin\Debug\net6.0\FluentAssertions.dll
 C:\Users\User\source\repos\EntOff\EntOff\bin\Debug\net6.0\Humanizer.dll
 C:\Users\User\source\repos\EntOff\EntOff\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\User\source\repos\EntOff\EntOff\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.Internal.dll
@@ -35,7 +34,6 @@ C:\Users\User\source\repos\EntOff\EntOff\bin\Debug\net6.0\Microsoft.IdentityMode
 C:\Users\User\source\repos\EntOff\EntOff\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\User\source\repos\EntOff\EntOff\bin\Debug\net6.0\Microsoft.OpenApi.dll
 C:\Users\User\source\repos\EntOff\EntOff\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
-C:\Users\User\source\repos\EntOff\EntOff\bin\Debug\net6.0\NetXception.dll
 C:\Users\User\source\repos\EntOff\EntOff\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\User\source\repos\EntOff\EntOff\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\User\source\repos\EntOff\EntOff\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -67,3 +65,7 @@ C:\Users\User\source\repos\EntOff\EntOff\obj\Debug\net6.0\refint\EntOff.dll
 C:\Users\User\source\repos\EntOff\EntOff\obj\Debug\net6.0\EntOff.pdb
 C:\Users\User\source\repos\EntOff\EntOff\obj\Debug\net6.0\EntOff.genruntimeconfig.cache
 C:\Users\User\source\repos\EntOff\EntOff\obj\Debug\net6.0\ref\EntOff.dll
+C:\Users\User\source\repos\EntOff\EntOff\bin\Debug\net6.0\Microsoft.Extensions.Caching.Redis.dll
+C:\Users\User\source\repos\EntOff\EntOff\bin\Debug\net6.0\StackExchange.Redis.StrongName.dll
+C:\Users\User\source\repos\EntOff\EntOff\bin\Debug\net6.0\FluentAssertions.dll
+C:\Users\User\source\repos\EntOff\EntOff\bin\Debug\net6.0\NetXception.dll

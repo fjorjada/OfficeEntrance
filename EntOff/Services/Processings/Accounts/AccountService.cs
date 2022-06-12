@@ -6,6 +6,7 @@ using EntOff.Api.Models.DTOs.Register;
 using EntOff.Api.Models.DTOs.Tags;
 using EntOff.Api.Models.DTOs.Users;
 using EntOff.Api.Models.Entities.Tags;
+using EntOff.Api.Models.Exceptions.Users;
 using EntOff.Api.Services.Foundations.SignIn;
 using EntOff.Api.Services.Foundations.Tags;
 using EntOff.Api.Services.Foundations.Users;
@@ -91,8 +92,21 @@ namespace EntOff.Api.Services.Processings.Accounts
 
             return user.ToDto(token);
         }
+        public async Task<string> UserLogoutAsync(LogoutDto logoutDto)
+        {
+            //deactivate the access token
+            try {
+                await tokenProvider.DeactivateCurrentAsync();
+                return "logout";
+            }
+            catch(Exception ex)
+            {
+                throw new InvalidUserException();
+            }
+            
+        }
 
-       
+
         private static Tag GenerateNewTag(Guid userId, string userRole)
         {
             //could be added as a column in the role table
@@ -107,16 +121,19 @@ namespace EntOff.Api.Services.Processings.Accounts
                 expirationYears = 1;
             }
 
+
             var newTag = new Tag
             {
                 UserId = userId,
                 Status = TagStatus.Pending,
                 IsAuthorized = false,
             };
-
-            newTag.ExpiresAt = expirationYears > 0
-                ? DateTimeOffset.UtcNow.AddYears(expirationYears)
-                : DateTimeOffset.UtcNow.AddHours(1);
+            
+                newTag.ExpiresAt = expirationYears > 0
+                    ? DateTime.Now.AddYears(expirationYears)
+                    : DateTime.Now.AddHours(1);
+            
+            
 
             newTag.Code = $"{userId}-{Guid.NewGuid()}";
 
