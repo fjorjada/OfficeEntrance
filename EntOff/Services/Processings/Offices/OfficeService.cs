@@ -80,9 +80,9 @@ namespace EntOff.Api.Services.Processings.Offices
         {
             try
             {
+                
                 var history = new List<HistoryDto>();
                 var histo = this.historyService.GetHistoryAsync();
-                var tags = this.userService.RetreiveUsersAsync();
                 Nullable<bool> searc = null;
                 if (histo != null)
                 {
@@ -100,8 +100,8 @@ namespace EntOff.Api.Services.Processings.Offices
                     }
 
                     var filtered = await histo.Where(x => searc == null ? search == 3 : x.InOut == searc).ToListAsync();
-
-                    history.AddRange(filtered.Select(y => y.HisDto()));
+                    history.AddRange(filtered.Select(y => y.HisDto())); 
+                    
                 }
                 return history;
             }catch(Exception ex)

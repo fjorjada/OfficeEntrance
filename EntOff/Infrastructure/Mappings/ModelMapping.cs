@@ -69,8 +69,8 @@ namespace EntOff.Api.Infrastructure.Mappings
             {
                 InOut = history.InOut,
                 Date = history.Date,
-                UserId = history.UserId
-               
+                UserId = history.UserId,
+                User = history.User
             };
         }
 

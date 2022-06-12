@@ -57,7 +57,7 @@ namespace EntOff.Api.Services.Processings.Tags
                 userTag.Status = TagStatus.Active;
             }
 
-            if (userTag.ExpiresAt <= DateTimeOffset.UtcNow)
+            if (userTag.ExpiresAt <= DateTime.Now)
             {
                 userTag.Status = TagStatus.Expired;
             }
@@ -70,6 +70,32 @@ namespace EntOff.Api.Services.Processings.Tags
             await this.tagService.ModifyTagAsync(userTag);
 
             return userTag.ToDto();
+        }
+
+        public async ValueTask<IEnumerable<TagDto>> UpdateTagAsync()
+        {
+            var tagsDto = new List<TagDto>();
+
+            var tags = this.tagService.RetrieveAllTags();
+            if (tags.Any())
+            {
+                var filteredTags = await tags.ToListAsync();
+
+                for (int i = 0; i< filteredTags.Count();i++ )
+                {
+                    if (filteredTags[i].ExpiresAt <= DateTime.Now)
+                    {
+                        filteredTags[i].Status = TagStatus.Expired;
+                        await this.tagService.ModifyTagAsync(filteredTags[i]);
+                    }
+                }
+                tagsDto.AddRange(filteredTags.Select(tag => tag.ToDto()));
+               
+
+            }
+
+            return tagsDto;
+
         }
     }
 }

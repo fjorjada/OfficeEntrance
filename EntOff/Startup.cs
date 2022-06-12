@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.AspNetCore.Http;
 using EntOff.Entrance.TokenManagement;
+using EntOff.Api.Services.Processings.Tags;
+using Hangfire;
 
 namespace EntOff.Api
 {
@@ -15,6 +17,8 @@ namespace EntOff.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddHangfire(x => x.UseSqlServerStorage("<connection string>"));
+            //services.AddHangfireServer();
             services.AddControllerWithFilters();
             services.AddLogging();
             services.AddDbContext<StorageEntrance>();
@@ -45,6 +49,7 @@ namespace EntOff.Api
             builder.UseAuthentication();
             builder.UseAuthorization();
             builder.UseCors("MyPolicy");
+            //builder.UseHangfireDashboard("/mydashboard");
             builder.UseMiddleware<TokenManagerMiddleware>();
             builder.UseEndpoints(endpoints => endpoints.MapControllers());
         }

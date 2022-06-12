@@ -6,5 +6,6 @@ namespace EntOff.Api.Services.Processings.Tags
     {
         ValueTask<IEnumerable<TagDto>> RetrieveAllTags(string search);
         ValueTask<TagDto> UpdateUserTagAsync(string username, UpdateTagDto updateTagDto);
+        ValueTask<IEnumerable<TagDto>> UpdateTagAsync();
     }
 }
